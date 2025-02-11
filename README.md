@@ -1,7 +1,5 @@
 # **Project: Sales Insights & Data Analysis - AtliQ Hardware**
 
-![Sales insights AtliQ](https://user-images.githubusercontent.com/118357991/230730818-34393de8-2b5c-46da-83f1-be293b0107b4.png)
-
 ## **Table of Contents**
 
 - [Problem Statement](#problem-statement)
@@ -18,14 +16,14 @@
 
 ## **Problem Statement**
 
-AtliQ Hardware, a leading supplier of computer hardware and peripherals across India, is facing challenges in tracking sales due to rapid market dynamics. The Sales Director struggles with:
+AtliQ Hardware, a leading supplier of computer hardware and peripherals across India, faces challenges in tracking sales due to rapid market dynamics. The Sales Director struggles with:
 
 - Lack of real-time sales insights
 - Dependency on verbal updates from regional managers
 - Difficulty in making data-driven decisions due to unstructured reporting
 - Overall declining sales performance
 
-To address these issues, the company seeks an **automated sales dashboard** using **Microsoft Power BI**, which will enable real-time data visualization and support **data-driven decision-making**.
+To address these issues, the company seeks an **automated sales dashboard** using **Microsoft Power BI**, enabling real-time data visualization and supporting **data-driven decision-making**.
 
 ---
 
@@ -77,10 +75,10 @@ SELECT * FROM sales.transactions WHERE market_code='Mark001';
 ```
 #### 4. Total revenue in 2020:
 ```sql
-SELECT SUM(sales.transactions.sales_amount) 
-FROM sales.transactions 
-INNER JOIN sales.date 
-ON sales.transactions.order_date = sales.date.date 
+SELECT SUM(sales.transactions.sales_amount)
+FROM sales.transactions
+INNER JOIN sales.date
+ON sales.transactions.order_date = sales.date.date
 WHERE sales.date.year=2020;
 ```
 
@@ -97,7 +95,7 @@ WHERE sales.date.year=2020;
 
 **DAX Formula for Currency Conversion:**
 ```DAX
-= Table.AddColumn(#"Filtered Rows", "normalized_sales_amount", each if [currency] = "USD" then [sales_amount]*75 else [sales_amount])
+Normalized_Sales_Amount = IF([Currency] = "USD", [Sales_Amount] * 75, [Sales_Amount])
 ```
 
 ---
@@ -121,19 +119,19 @@ Key measures used in Power BI:
 
 - **Profit Margin %**
 ```DAX
-Profit Margin % = DIVIDE([Total Profit Margin],[Revenue],0)
+Profit_Margin_Percentage = DIVIDE([Total_Profit], [Revenue], 0)
 ```
 - **Revenue**
 ```DAX
-Revenue = SUM('sales_transactions'[sales_amount])
+Total_Revenue = SUM(sales_transactions[Sales_Amount])
 ```
 - **Sales Quantity**
 ```DAX
-Sales Quantity = SUM('sales_transactions'[sales_qty])
+Total_Sales_Quantity = SUM(sales_transactions[Sales_Qty])
 ```
 - **Revenue Growth (Year-over-Year)**
 ```DAX
-Revenue LY = CALCULATE([Revenue],SAMEPERIODLASTYEAR('sales_date'[date]))
+Revenue_LY = CALCULATE([Total_Revenue], SAMEPERIODLASTYEAR(sales_date[Date]))
 ```
 
 ---
@@ -142,13 +140,11 @@ Revenue LY = CALCULATE([Revenue],SAMEPERIODLASTYEAR('sales_date'[date]))
 
 The final dashboard provides real-time insights into sales performance, profit margins, and market trends.
 
-| **Key Insights** |
-| ---------------- |
-| ![Dashboard 1](https://user-images.githubusercontent.com/118357991/234025264-f5f1d7af-2ead-4d9a-b8ae-7524d200b7dd.jpg) |
+### **Key Insights Dashboard**
+![Dashboard](https://raw.githubusercontent.com/Lopamudra789/SALES-ANALYSIS-ATLIQ-HARDWARE/main/sc_1.png)
 
-| **Profit Analysis** |
-| ------------------- |
-| ![Dashboard 2](https://user-images.githubusercontent.com/118357991/234025629-3c2e3dcf-77fb-4c20-acdb-3f92604d1292.jpg) |
+### **Profit Analysis Dashboard**
+![Profit Analysis](https://raw.githubusercontent.com/Lopamudra789/SALES-ANALYSIS-ATLIQ-HARDWARE/main/sc_2.png)
 
 ---
 
